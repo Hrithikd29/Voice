@@ -1,0 +1,84 @@
+.container {
+  background-color: black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+@media only screen and (max-width: 1152px) {
+  .container {
+    flex-direction: column;
+    height: 150vh;
+    align-items: center;
+    
+  }
+  .custom{
+    z-index: 20;
+  }
+}
+.camCanvas {
+  /* width:25rem; */
+  /* height:25rem; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.webcam {
+  /* border: 5px solid rgb(35, 153, 255); */
+  -webkit-box-shadow: 0px 0px 80px 24px rgba(3, 221, 255, 0.92);
+  -moz-box-shadow: 0px 0px 80px 24px rgba(3, 221, 255, 0.92);
+  box-shadow: 0px 0px 80px 24px rgba(3, 221, 255, 0.92);
+}
+.canvas {
+}
+.img {
+  text-align: "center";
+  height: 5rem;
+  z-index: 15;
+}
+.custom {
+  /* padding-top:0; */
+  height: 20rem;
+  padding: 2rem;
+  background-color: white;
+  color: black;
+  /* z-index: 15; */
+  /* width: 15rem; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+
+  /* backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125); */
+}
+.custom > p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 0;
+}
+.custom > button {
+  background-color: #3dcfff;
+  color: black;
+  border-radius: 5px;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+.gender {
+  height: 10rem;
+}

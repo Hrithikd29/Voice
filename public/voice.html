@@ -1,0 +1,128 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice</title>
+</head>
+
+<body>
+    Select gender:
+    <input type="radio" id="male" name="gen" value="male">
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gen" value="female">
+    <label for="female">Female</label>
+    <br><br>
+    <input type="text" id="txtInput">
+    <br><br>
+    <button id="btnSpeak">Speak!</button>
+
+    <script>
+
+        var voiceList = document.querySelector("#voiceList");
+        var txtInput = document.querySelector("#txtInput");
+        var btnSpeak = document.querySelector("#btnSpeak");
+        var tts = window.speechSynthesis;
+        var voices = [];
+        // if (speechSynthesis !== undefined) {
+        //     speechSynthesis.onvoiceschanged = () => {
+        //         voices = tts.getVoices();
+        //         console.log(voices);
+        //     };
+        // }
+        btnSpeak.addEventListener('click', () => {
+
+            console.log(voices);
+            var toSpeak = new SpeechSynthesisUtterance(txtInput.value);
+            var ele = document.getElementsByName('gen');
+            if (ele[0].checked == true)
+                toSpeak.voice = tts.getVoices()[1];
+            else {
+                toSpeak.voice = tts.getVoices()[12];
+                console.log(voices);
+            }
+            tts.speak(toSpeak);
+            txtInput.value = '';
+        });
+    </script>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en" class="notranslate">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <title class="notranslate">Document</title>
+</head>
+
+<body>
+    <p class="notranslate">Select Voice: <select id='voiceList'></select> </p>
+    <p id="conv" class="translate"></p>
+
+    <input id='txtInput' class="translate" /> <br><br>
+    <button id='btnSpeak' class="notranslate">Speak!</button>
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ '#btnSpeak': 'en' }, 'google_translate_element');
+            console.log(google_translate_element);
+        }
+    </script>
+
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        var txtInput = document.querySelector('#txtInput');
+        var voiceList = document.querySelector('#voiceList');
+        var conv = document.querySelector('#conv');
+        var btnSpeak = document.querySelector('#btnSpeak');
+        var synth = window.speechSynthesis;
+        var voices = [];
+
+        PopulateVoices();
+        if (speechSynthesis !== undefined) {
+            speechSynthesis.onvoiceschanged = PopulateVoices;
+        }
+        txtInput.addEventListener('change', () => {
+            console.log(txtInput.value);
+            conv.innerHTML = txtInput.value
+        })
+        btnSpeak.addEventListener('click', () => {
+            var toSpeak = new SpeechSynthesisUtterance(conv.textContent);
+            // var toSpeak = new SpeechSynthesisUtterance(txtInput.value);
+            var selectedVoiceName = voiceList.selectedOptions[0].getAttribute('data-name');
+            voices.forEach((voice) => {
+                if (voice.name === selectedVoiceName) {
+                    toSpeak.voice = voice;
+                }
+            });
+            synth.speak(toSpeak);
+        });
+
+        function PopulateVoices() {
+            voices = synth.getVoices();
+            var selectedIndex = voiceList.selectedIndex < 0 ? 0 : voiceList.selectedIndex;
+            voiceList.innerHTML = '';
+            voices.forEach((voice) => {
+                var listItem = document.createElement('option');
+                listItem.textContent = voice.name;
+                listItem.setAttribute('data-lang', voice.lang);
+                listItem.setAttribute('data-name', voice.name);
+                voiceList.appendChild(listItem);
+            });
+
+            voiceList.selectedIndex = selectedIndex;
+        }
+    </script>
+</body>
+
+</html>
